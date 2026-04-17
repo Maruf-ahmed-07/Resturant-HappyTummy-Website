@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tummy | Delicious Food in Dhaka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h2, .serif-font { font-family: 'Playfair Display', serif; }
+        
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .about-hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Page transition classes */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Hide scrollbar for category menu */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigate('home')">
+                    <span class="text-2xl font-extrabold tracking-tighter text-black uppercase">Happy<span class="text-rose-600">Tummy</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigate('home')" class="nav-link text-sm font-semibold text-stone-900 hover:text-rose-600 transition" data-target="home">Home</button>
+                    <button onclick="navigate('menu')" class="nav-link text-sm font-semibold text-stone-900 hover:text-rose-600 transition" data-target="menu">Our Menu</button>
+                    <button onclick="navigate('about')" class="nav-link text-sm font-semibold text-stone-900 hover:text-rose-600 transition" data-target="about">About Us</button>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://www.foodpanda.com.bd/restaurant/t3ny/happy-tummy?utm_source=google&utm_medium=organic&utm_campaign=google_reserve_place_order_action" target="_blank" class="bg-rose-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-rose-700 transition shadow-lg shadow-rose-600/30 flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Order Now
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-900 hover:text-rose-600 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <button onclick="navigate('home'); closeMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-stone-900 hover:bg-stone-50 hover:text-rose-600">Home</button>
+                <button onclick="navigate('menu'); closeMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-stone-900 hover:bg-stone-50 hover:text-rose-600">Our Menu</button>
+                <button onclick="navigate('about'); closeMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-stone-900 hover:bg-stone-50 hover:text-rose-600">About Us</button>
+                <a href="https://www.foodpanda.com.bd/restaurant/t3ny/happy-tummy?utm_source=google&utm_medium=organic&utm_campaign=google_reserve_place_order_action" target="_blank" class="block w-full text-center mt-4 bg-rose-600 text-white px-3 py-3 rounded-md text-base font-medium hover:bg-rose-700">Order on Foodpanda</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-20">
+
+        <!-- ================= HOME PAGE ================= -->
+        <div id="page-home" class="page-content active">
+            <!-- Hero Section -->
+            <section class="hero-bg min-h-[85vh] flex items-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="max-w-2xl text-left">
+                        <span class="inline-block py-1 px-3 rounded-full bg-rose-600/20 text-rose-300 text-sm font-semibold tracking-wider mb-4 border border-rose-500/30">WEST RAMPURA, DHAKA</span>
+                        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">Fresh, Cozy & <br><span class="text-rose-500 italic">Delicious.</span></h1>
+                        <p class="text-lg md:text-xl text-stone-200 mb-10 font-light max-w-lg">Homemade quality fast food made on the spot just for you. Discover the best Meatboxes, Burgers, and Pizzas in town.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigate('menu')" class="bg-rose-600 text-white px-8 py-4 rounded-full text-base font-bold hover:bg-rose-700 transition shadow-lg shadow-rose-600/30 text-center">
+                                View Full Menu
+                            </button>
+                            <button onclick="navigate('about')" class="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-full text-base font-bold hover:bg-white/20 transition text-center">
+                                Our Story
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Categories / Teaser -->
+            <section class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-stone-900 mb-4">Customer Favorites</h2>
+                        <p class="text-stone-500 max-w-2xl mx-auto">A quick glimpse of what everyone is ordering right now.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-stone-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group border border-stone-100">
+                            <div class="h-64 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=800&q=80" alt="KitKat Shake" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                                <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-stone-900 shadow">Popular</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">KitKat Shake</h3>
+                                <p class="text-sm text-stone-500 mb-4">Indulgent drink prepared with milk, crushed kitkat, sugar & chocolate.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-rose-600">Tk 135</span>
+                                    <button onclick="navigate('menu')" class="text-sm font-semibold text-stone-900 hover:text-rose-600">See all Beverages &rarr;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-stone-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group border border-stone-100">
+                            <div class="h-64 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Burger" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Soft & Juicy Burger</h3>
+                                <p class="text-sm text-stone-500 mb-4">Tender & juicy burger with fresh, basic toppings.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-rose-600">Tk 80</span>
+                                    <button onclick="navigate('menu')" class="text-sm font-semibold text-stone-900 hover:text-rose-600">See all Burgers &rarr;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-stone-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group border border-stone-100">
+                            <div class="h-64 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Pizza" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">BBQ Tummy Pizza</h3>
+                                <p class="text-sm text-stone-500 mb-4">Topped with chicken, bbq sauce, cheese, tomato & olive.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-rose-600">Tk 235</span>
+                                    <button onclick="navigate('menu')" class="text-sm font-semibold text-stone-900 hover:text-rose-600">See all Pizzas &rarr;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button onclick="navigate('menu')" class="inline-flex items-center gap-2 text-stone-900 font-bold border-b-2 border-stone-900 hover:text-rose-600 hover:border-rose-600 transition pb-1">
+                            Explore The Full Menu <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= MENU PAGE ================= -->
+        <div id="page-menu" class="page-content hidden bg-stone-50">
+            <div class="bg-stone-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Complete Menu</h1>
+                    <p class="text-stone-400 max-w-2xl mx-auto">Made fresh on the spot after you order. Browse our wide selection of delicious offerings.</p>
+                </div>
+            </div>
+
+            <!-- Sticky Category Navigation -->
+            <div class="sticky top-20 z-40 bg-white shadow-sm border-b border-stone-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex space-x-6 overflow-x-auto py-4 no-scrollbar items-center" id="category-nav">
+                        <!-- JS Will Inject Categories Here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div id="menu-container" class="space-y-16">
+                    <!-- JS Will Inject Menu Sections Here -->
+                </div>
+            </div>
+            
+            <!-- Floating Order Button -->
+            <div class="fixed bottom-8 right-8 z-50">
+                <a href="https://www.foodpanda.com.bd/restaurant/t3ny/happy-tummy?utm_source=google&utm_medium=organic&utm_campaign=google_reserve_place_order_action" target="_blank" class="flex items-center justify-center w-16 h-16 bg-rose-600 text-white rounded-full shadow-2xl hover:bg-rose-700 hover:scale-105 transition transform">
+                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <div id="page-about" class="page-content hidden bg-white">
+            
+            <section class="about-hero-bg h-[60vh] flex items-center justify-center text-center">
+                <div class="max-w-3xl px-4">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Our Story</h1>
+                    <p class="text-xl text-stone-200 font-light">More than just fast food. It's an experience.</p>
+                </div>
+            </section>
+
+            <section class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <span class="text-rose-600 font-bold tracking-wider uppercase text-sm mb-2 block">The Happy Tummy Vibe</span>
+                            <h2 class="text-4xl font-bold text-stone-900 mb-6 leading-tight">Fresh, Homemade, and Crafted With Love</h2>
+                            <p class="text-stone-600 mb-6 leading-relaxed text-lg">
+                                At Happy Tummy, we believe that fast food doesn't mean compromising on quality. We pride ourselves on offering food that feels and tastes genuinely <span class="font-bold text-stone-900">homemade</span>.
+                            </p>
+                            <p class="text-stone-600 mb-6 leading-relaxed text-lg">
+                                Nothing sits under a heat lamp here. Every single dish is <span class="font-bold text-stone-900">made on the spot</span> right after you place your order. Our <span class="font-bold text-stone-900">live kitchen</span> concept means you can smell the aromas, hear the sizzle, and witness the passion that goes into your meal.
+                            </p>
+                            <p class="text-stone-600 leading-relaxed text-lg">
+                                Whether you're dropping by to pick up your favorite Meatbox or staying for a bite, our space offers a <span class="font-bold text-stone-900">really cozy vibe</span> that makes you feel right at home in West Rampura.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Cooking" class="rounded-2xl object-cover w-full h-64 shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80" alt="Restaurant Vibe" class="rounded-2xl object-cover w-full h-64 shadow-lg mt-8">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-stone-50 border-t border-stone-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-stone-900">Visit Us</h2>
+                        <p class="text-stone-500 mt-2">Come for the food, stay for the cozy vibe.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Contact Info Box -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-100 lg:col-span-1">
+                            <h3 class="text-xl font-bold text-stone-900 mb-6">Contact Information</h3>
+                            <ul class="space-y-6">
+                                <li class="flex items-start">
+                                    <div class="bg-rose-100 p-2 rounded-lg mr-4">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-rose-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-stone-900 block mb-1">Address</p>
+                                        <p class="text-stone-600 text-sm">211/C, Ulon Road, West Rampura<br>Dhaka, Bangladesh, 1219</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-rose-100 p-2 rounded-lg mr-4">
+                                        <i data-lucide="phone" class="w-5 h-5 text-rose-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-stone-900 block mb-1">Phone</p>
+                                        <p class="text-stone-600 text-sm">01719-185428</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-rose-100 p-2 rounded-lg mr-4">
+                                        <i data-lucide="mail" class="w-5 h-5 text-rose-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-stone-900 block mb-1">Email</p>
+                                        <p class="text-stone-600 text-sm break-all">happytummy041019@gmail.com</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-8 space-y-3">
+                                <a href="https://maps.app.goo.gl/TmGYz319H7iNbaYh8" target="_blank" class="w-full flex items-center justify-center gap-2 bg-stone-900 text-white px-4 py-3 rounded-xl font-semibold hover:bg-stone-800 transition">
+                                    <i data-lucide="navigation" class="w-4 h-4"></i> Get Directions
+                                </a>
+                                <a href="https://www.facebook.com/yourhappytummy2019" target="_blank" class="w-full flex items-center justify-center gap-2 border border-stone-300 text-stone-700 px-4 py-3 rounded-xl font-semibold hover:bg-stone-50 transition">
+                                    <i data-lucide="facebook" class="w-4 h-4"></i> Facebook Page
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Map -->
+                        <div class="bg-stone-200 rounded-2xl overflow-hidden shadow-sm h-96 lg:h-auto lg:col-span-2 relative">
+                            <!-- Embed Google Maps pointing to the exact address -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1085.5934608696004!2d90.41777050743632!3d23.765680715507557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c74b52696177%3A0x3c307d9c4b6095be!2sHappy%20Tummy!5e0!3m2!1sen!2sbd!4v1776453439759!5m2!1sen!2sbd" 
+                                class="absolute inset-0 w-full h-full border-0" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-white py-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <h2 class="text-2xl font-extrabold tracking-tighter mb-2 uppercase">Happy<span class="text-rose-500">Tummy</span></h2>
+                <p class="text-stone-400 text-sm">Delicious homemade food in West Rampura.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-end">
+                <div class="flex space-x-6 mb-4">
+                    <a href="https://www.facebook.com/yourhappytummy2019" target="_blank" class="text-stone-400 hover:text-white transition">
+                        <span class="sr-only">Facebook</span>
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                <p class="text-stone-500 text-xs">© 2026 Happy Tummy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Navigation Logic
+        function navigate(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => el.style.display = 'none', 300); // Wait for fade out
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById('page-' + pageId);
+            setTimeout(() => {
+                targetPage.style.display = 'block';
+                // Trigger reflow
+                void targetPage.offsetWidth;
+                targetPage.classList.add('active');
+            }, 300);
+
+            // Update active state on nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.dataset.target === pageId) {
+                    link.classList.add('text-rose-600');
+                    link.classList.remove('text-stone-900');
+                } else {
+                    link.classList.remove('text-rose-600');
+                    link.classList.add('text-stone-900');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Comprehensive Menu Data from PDF
+        const menuData = [
+            {
+                id: "burgers",
+                category: "Burgers",
+                items: [
+                    { name: "Soft & Juicy Burger", price: 80, desc: "Tender & juicy burger with basic toppings", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Steak Grilled Burger", price: 130, desc: "Burger with a simple grilled chicken steak & basic toppings", img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Crispy Burger", price: 135, desc: "Crispy chicken, juicy patty & fresh lettuce", img: "https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Naga Burger", price: 150, desc: "Fiery burger prepared with chicken, naga chili, onion, cheese & mayo", img: "https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Steak BBQ Burger", price: 155, desc: "Burger with a grilled chicken steak & smoky bbq flavor", img: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Peri-Peri Chicken Burger", price: 200, desc: "Served with peri peri sauce", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Sausage Delight", price: 200, desc: "Prepared with chicken sausage, lightly seasoned & grilled", img: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Mushroom Signature Burger", price: 210, desc: "1:1 - Prepared with grilled mushroom, cheese, lettuce, patty & sauce", img: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Cheese Premium", price: 270, desc: "High-quality chicken dish with cheese", img: "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Happy Tummy Special Burger", price: 310, desc: "Burger with beef, cheese, lettuce & bun", img: "https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=800&q=80" }
+                ]
+            },
+            {
+                id: "pizzas",
+                category: "Pizza",
+                items: [
+                    { name: "Cheese Tummy", price: 160, desc: "Topped with mozzarella cheese", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Vegetarian Tummy", price: 180, desc: "Topped with capsicum, mushrooms, tomato, onion & black olive", img: "https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Meatball Tummy", price: 200, desc: "Topped with chicken meatball, cheese, mushrooms, onion & black olive", img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Tummy Loves Chicken", price: 210, desc: "Topped with chicken, cheese, mushrooms, onion, tomato & black olive", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Tummy Sausage Affairs", price: 220, desc: "Topped with chicken with bbq sauce, cheese, tomato, onion & black olive", img: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&w=800&q=80" },
+                    { name: "BBQ Tummy", price: 235, desc: "Topped with chicken, bbq sauce, cheese, tomato, onion & black olive", img: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Meat Lovers Tummy", price: 300, desc: "Topped with chicken, sausage, meatball, mushrooms, tomato, onion & olive", img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Tummy On FIRE", price: 310, desc: "Chicken, special sauce, extra chili, capsicum, mushrooms, onion, tomato & olive", img: "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80" }
+                ]
+            },
+            {
+                id: "meatboxes",
+                category: "Meatboxes",
+                items: [
+                    { name: "Classic Meatbox", price: 190, desc: "1:1 - Consists of chicken, meatball, sausage, french fries & potato wedges" },
+                    { name: "BBQ Meatbox", price: 230, desc: "1:1 - Consists of bbq chicken, meatball, sausage, french fries & potato wedges" },
+                    { name: "Overloaded Meatbox", price: 290, desc: "1:1 - Consists of chicken, nuggets, meatball, sausage, french fries & potato wedges" }
+                ]
+            },
+            {
+                id: "rice-meals",
+                category: "Rice Bowls & Platters",
+                items: [
+                    { name: "Rice Bowl-1", price: 120, desc: "Consists of fried rice with chicken popcorn", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rice Bowl-2", price: 140, desc: "Consists of fried rice with chicken gravy", img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rice Platter-1", price: 200, desc: "Consists of fried rice, 1 pc spicy chicken & soft drink", img: "https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rice Platter-2", price: 220, desc: "Consists of fried rice, 1 pc spicy chicken, vegetables & soft drink", img: "https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rice Platter-3", price: 240, desc: "Consists of fried rice, bbq wings-3 pcs, vegetables & soft drink", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Rice Platter-4", price: 250, desc: "Consists of fried rice, 3 pcs peri-peri wings, vegetables & soft drink", img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80" }
+                ]
+            },
+            {
+                id: "snacks",
+                category: "Snacks",
+                items: [
+                    { name: "Chicken Sausage (Per Stick)", price: 32, desc: "Single flavorful chicken sausage on a stick" },
+                    { name: "Chicken Ball (Per Stick)", price: 38, desc: "One crispy chicken ball served on a skewer", img: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Lollipop", price: 60, desc: "Spicy, crispy chicken wings shaped like lollipops, served with dipping sauce", img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Nuggets (Per Stick)", price: 85, desc: "Single piece breaded fried chicken nugget", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Spicy Fried Chicken", price: 100, desc: "Tender & juicy chicken, fried until crispy outside, served hot", img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Crispy Fried Chicken", price: 110, desc: "Tender & juicy chicken, fried until crispy outside, served hot", img: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Potato Wedges", price: 110, desc: "10 pcs of delicious potato wedges", img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Nachos", price: 120, desc: "Crunchy tortilla chips covered with sauce & meat", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=800&q=80" },
+                    { name: "French Fries", price: 125, desc: "Deep-fried thinly cut potato chips", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Hot Wings", price: 170, desc: "6 pcs - Seasoned chicken wings with a perfectly crispy coating", img: "https://images.unsplash.com/photo-1524114664604-cd8133cd67ad?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Momo", price: 180, desc: "6 pcs - Soft dumplings filled with juicy minced chicken", img: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Crispy Wings", price: 195, desc: "Deep-fried chicken wings with an extra crispy coating", img: "https://images.unsplash.com/photo-1588676239166-51978d34346e?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Burning Wings", price: 220, desc: "6 pcs - Consists of wings with naga sauce", img: "https://images.unsplash.com/photo-1614398751058-25f053597b83?auto=format&fit=crop&w=800&q=80" }
+                ]
+            },
+            {
+                id: "sandwiches",
+                category: "Sandwich, Shawarma & Wraps",
+                items: [
+                    { name: "Chicken Sandwich", price: 50, desc: "A delicious mix of mayonnaise, chicken, pepper & veggies", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Wrap", price: 70, desc: "Prepared with grilled chicken, lettuce, tomato, cucumber", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Roll", price: 80, desc: "1 pc - Juicy chicken cut in small pieces mixed in special sauces & wrapped", img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken BBQ Wrap", price: 85, desc: "BBQ chicken wrapped in a soft tortilla with fresh veggies", img: "https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Club Sandwich", price: 120, desc: "Prepared with bread, chicken chunks, mayo & fresh veggies", img: "https://images.unsplash.com/photo-1553909489-ec2175ef3f52?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chicken Shawarma", price: 125, desc: "Delicious Middle Eastern style wrap", img: "https://images.unsplash.com/photo-1561651823-34feb02250e4?auto=format&fit=crop&w=800&q=80" },
+                    { name: "BBQ Chicken Shawarma", price: 145, desc: "Middle Eastern style wrap with BBQ flavor", img: "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Subway Sandwich", price: 150, desc: "Hearty prepared with assorted fillings in a sub-roll", img: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Special Subway Sandwich", price: 200, desc: "Fresh bread, grilled chicken & savory toppings", img: "https://images.unsplash.com/photo-1619604106579-242542a3bd73?auto=format&fit=crop&w=800&q=80" }
+                ]
+            },
+            {
+                id: "beverages",
+                category: "Beverages & Desserts",
+                items: [
+                    { name: "Tutti Frutti Cold Coffee", price: 40, desc: "1:1 - Delicious coffee served over ice", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Lassi", price: 75, desc: "1:1 - Yogurt based refreshing drink", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chocolate Cold Coffee", price: 75, desc: "1:1 - Delicious coffee served over ice", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Vanilla Shake", price: 80, desc: "Prepared with milk, vanilla ice cream, sugar & ice", img: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Strawberry Milkshake", price: 80, desc: "1:1 - Fresh strawberries blended with sugar & milk", img: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Mango Shake", price: 80, desc: "1:1 - Fresh mango blended with milk, ice cream & sugar", img: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Dark Chocolate", price: 85, desc: "Prepared with pure dark chocolate, sugar & cocoa powder", img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Chocolate Blast", price: 95, desc: "Rich chocolate, creamy texture & sweet filling", img: "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Strawberry Smoothie", price: 100, desc: "Refreshing blend of ripe strawberries, yogurt & sweetness", img: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Oreo Shake", price: 100, desc: "1:1 - Chilled drink with yummy oreo flavor", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Mango Smoothie", price: 100, desc: "1:1 - Fresh mango blended with milk, ice cream, ice & sugar", img: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Blizzard", price: 100, desc: "Ice cream, milk, chocolate syrup, sprinkles & whipped cream", img: "https://images.unsplash.com/photo-1553177595-4de2bb0842b9?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Choco Loco", price: 110, desc: "Intense chocolate treat for the ultimate chocolate lover", img: "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Special Cold Coffee", price: 120, desc: "1:1 - Delicious coffee served over ice", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Virgin Mojito", price: 120, desc: "1:1 - Refreshing drink made with fresh mint, fresh lime juice & ice", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80" },
+                    { name: "KitKat Shake", price: 135, desc: "Indulgent drink prepared with milk, crushed kitkat, sugar & chocolate", img: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=800&q=80" },
+                    { name: "Special Faluda", price: 175, desc: "Delicious dessert, full of flavors!", img: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80" }
+                ]
+            }
+        ];
+
+        // Render Menu Logic
+        const categoryNav = document.getElementById('category-nav');
+        const menuContainer = document.getElementById('menu-container');
+
+        function renderMenu() {
+            let navHtml = '';
+            let contentHtml = '';
+
+            menuData.forEach((section, index) => {
+                // Build Nav Items
+                navHtml += `
+                    <a href="#section-${section.id}" class="whitespace-nowrap px-4 py-2 rounded-full border ${index === 0 ? 'bg-stone-900 text-white border-stone-900' : 'bg-white text-stone-600 border-stone-200 hover:border-stone-900 hover:text-stone-900'} text-sm font-semibold transition-colors nav-pill">
+                        ${section.category}
+                    </a>
+                `;
+
+                // Build Menu Sections
+                let itemsHtml = section.items.map(item => {
+                    let imageSection = item.img ? `
+                        <div class="w-full sm:w-28 h-40 sm:h-28 flex-shrink-0 rounded-xl overflow-hidden bg-stone-100">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                    ` : '';
+                    
+                    return `
+                        <div class="flex flex-col sm:flex-row gap-4 p-4 bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition">
+                            ${imageSection}
+                            <div class="flex-grow flex flex-col justify-center">
+                                <div class="flex justify-between items-start">
+                                    <div class="pr-4">
+                                        <h4 class="text-lg font-bold text-stone-900 leading-tight mb-1">${item.name}</h4>
+                                        <p class="text-sm text-stone-500">${item.desc}</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-right mt-1 sm:mt-0">
+                                        <span class="inline-block font-bold text-rose-600 text-lg bg-rose-50 px-3 py-1 rounded-lg">Tk ${item.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                contentHtml += `
+                    <div id="section-${section.id}" class="scroll-mt-32">
+                        <h3 class="text-2xl font-bold text-stone-900 mb-6 pb-2 border-b-2 border-stone-100 flex items-center gap-2">
+                            <i data-lucide="utensils" class="w-5 h-5 text-rose-600"></i> ${section.category}
+                        </h3>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            categoryNav.innerHTML = navHtml;
+            menuContainer.innerHTML = contentHtml;
+            
+            // Re-init icons for newly added HTML
+            lucide.createIcons();
+
+            // Setup scroll spy for menu pills
+            setupScrollSpy();
+        }
+
+        function setupScrollSpy() {
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            pills.forEach(pill => {
+                pill.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    // Update active pill styling
+                    pills.forEach(p => {
+                        p.classList.remove('bg-stone-900', 'text-white', 'border-stone-900');
+                        p.classList.add('bg-white', 'text-stone-600', 'border-stone-200');
+                    });
+                    this.classList.remove('bg-white', 'text-stone-600', 'border-stone-200');
+                    this.classList.add('bg-stone-900', 'text-white', 'border-stone-900');
+
+                    // Scroll
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Initialize Menu Rendering
+        renderMenu();
+
+        // Set initial state (Home)
+        document.querySelector('[data-target="home"]').classList.add('text-rose-600');
+        document.querySelector('[data-target="home"]').classList.remove('text-stone-900');
+    </script>
+</body>
+</html>
