@@ -4,7 +4,7 @@ A polished, fully responsive single-page restaurant website for **Happy Tummy**,
 
 ## Live Demo
 
-- Vercel: https://happytummy.vercel.app
+- Vercel: https://happytummybd.vercel.app
 
 ## Repository
 
