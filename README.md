@@ -68,5 +68,5 @@ The page will automatically render the new content in the correct section.
 - Address: 211/C, Ulon Road, West Rampura, Dhaka, Bangladesh, 1219
 - Phone: 01719-185428
 - Email: happytummy041019@gmail.com
-- Order Online: Foodpanda
+- Order Online: https://www.foodpanda.com.bd/restaurant/t3ny/happy-tummy?utm_source=google&utm_medium=organic&utm_campaign=google_reserve_place_order_action
 
