@@ -1,8 +1,8 @@
-# HappyTummy Restaurant Website
+# 🍔 Happy Tummy Restaurant Website
 
-A clean and responsive static landing page for **HappyTummy**, designed to present the restaurant's menu, about section, location details, and ordering information.
+A polished, fully responsive single-page restaurant website for **Happy Tummy**, a cozy fast-food spot in **West Rampura, Dhaka**. The project was built to present the restaurant's menu, brand story, location, and ordering options in a clean, modern layout that works well both as a live product and as a portfolio piece.
 
-## Live Website
+## Live Demo
 
 - Vercel: https://happytummy.vercel.app
 
@@ -10,34 +10,63 @@ A clean and responsive static landing page for **HappyTummy**, designed to prese
 
 - GitHub: git@github.com:Maruf-ahmed-07/Resturant-HappyTummy-Website.git
 
-## Project Overview
+## Features
 
-This project is built as a modern restaurant landing page focused on clarity, visual appeal, and easy navigation for customers.
+- Single-page navigation with smooth section switching for Home, Menu, and About.
+- Fully responsive layout that adapts well across mobile, tablet, and desktop screens.
+- Dynamic menu rendering powered by a JavaScript data array, making future updates simple.
+- Sticky category navigation for quick browsing through the menu sections.
+- Modern visual styling with Tailwind CSS, Google Fonts, and Lucide icons.
+- Direct links to Foodpanda, Google Maps, and the restaurant's social presence.
+- Portfolio-friendly presentation that shows both design and front-end structure clearly.
 
-It includes:
+## Technologies Used
 
-- Home/Landing section
-- Menu highlights
-- About section
-- Location and contact information
-- External order link
+- HTML5 for semantic structure.
+- Tailwind CSS via CDN for styling and responsive layout.
+- Vanilla JavaScript for navigation, menu rendering, and interactive behavior.
+- Lucide Icons for lightweight SVG icons.
+- Google Fonts for the Poppins and Playfair Display type pairing.
 
-## Tech Stack
+## How to Run
 
-- HTML5
-- CSS3
-- JavaScript (if applicable in future updates)
+This project does not require a build step or package installation.
 
-## Run Locally
+1. Clone or download the repository.
+2. Open `index.html` in any modern browser.
+3. Make sure you have an internet connection so external assets such as Tailwind, fonts, icons, and images can load properly.
 
-Because this is a static website, you can open `index.html` directly in your browser.
+## Project Structure
 
-For a better local development workflow, you can also use a simple local server.
+The application is self-contained inside `index.html`.
 
-## Deployment
+- `head`: meta tags, CDN links, fonts, icons, and custom styles.
+- `nav`: the sticky top navigation with desktop and mobile actions.
+- `main`: the Home, Menu, and About sections.
+- `footer`: social links and copyright information.
+- `script`: icon initialization, SPA navigation, and menu rendering logic.
 
-This site is deployed on **Vercel** and is suitable for portfolio presentation as a production-style static web project.
+## Updating the Menu
 
-## Author
+To update the menu, edit the `menuData` array inside the `<script>` section near the bottom of `index.html`.
 
-Maruf Ahmed
+Each menu item can be updated directly in the data object:
+
+```js
+{
+	name: "New Item Name",
+	price: 150,
+	desc: "Description of the item",
+	img: "https://url-to-your-image.jpg"
+}
+```
+
+The page will automatically render the new content in the correct section.
+
+## Contact Information
+
+- Address: 211/C, Ulon Road, West Rampura, Dhaka, Bangladesh, 1219
+- Phone: 01719-185428
+- Email: happytummy041019@gmail.com
+- Order Online: Foodpanda
+
